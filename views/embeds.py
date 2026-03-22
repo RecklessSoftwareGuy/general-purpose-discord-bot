@@ -42,3 +42,16 @@ def warn_dm_x1(moderator: discord.User | discord.Member, reason: str, guildName:
     em = discord.Embed(title="You have been warned!", description=f"`Reason: {reason}`", color=discord.Colour.light_grey())
     em.set_footer(text=f"Sent from {guildName}")
     return em
+
+def mprofile_x0(userData: dict) -> discord.Embed:
+    em = discord.Embed(title=f"{userData["username"]}'s Server Profile", color=discord.Colour.og_blurple())
+    em.add_field(name="Created:", value=f"<t:{userData["createdAt"]}:R>", inline=True)
+    em.add_field(name="Joined:", value=f"<t:{userData["joinedAt"]}:R>", inline=True)
+    em.add_field(name="Messages:", value=f"{userData["nMessages"]} messages", inline=False)
+    # em.add_field(name="Last Online:", value=f"{userData["lastOnline"]}", inline=True)
+    try:
+        em.set_author(name=f"{userData["authorName"]}", icon_url=f"{userData["authorAvatar"].url}")
+    except:
+        pass
+    em.set_footer(text=f"{userData["servername"]}", icon_url={userData["serverAvatar"]})
+    return em

@@ -19,7 +19,7 @@ class GPDB(commands.Bot):
             print(f"Unhandled error: {error}")
     
 async def extensions(bot: commands.Bot, mode: str):
-    extensions = ['moderation']
+    extensions = ['moderation', 'messageTracker']
     if mode == "load":
         for extension in extensions:
             try:
