@@ -55,3 +55,19 @@ def mprofile_x0(userData: dict) -> discord.Embed:
         pass
     em.set_footer(text=f"{userData["servername"]}", icon_url={userData["serverAvatar"]})
     return em
+
+def softban_x0(user: discord.Member | discord.User) -> discord.Embed:
+    em = discord.Embed(description=f"{user.global_name} has been softbanned!", color=discord.Colour.red())
+    return em
+
+def softban_dm_x1(user: discord.Member | discord.User, guildName: str) -> discord.Embed:
+    em = discord.Embed(title=f"You have been softbanned from {guildName}! Please use a new invite if you wish to re-join")
+    return em
+
+def lockchannel_x0() -> discord.Embed:
+    em = discord.Embed(title="Channel Locked", color = discord.Colour.yellow())
+    return em
+
+def unlockchannel_x0() -> discord.Embed:
+    em = discord.Embed(title="Channel unlocked", color = discord.Colour.yellow())
+    return em

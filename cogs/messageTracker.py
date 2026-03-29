@@ -10,7 +10,7 @@ class messageTracker(commands.Cog):
 
     @commands.Cog.listener(name="on_message")
     async def on_message(self, message: discord.Message):
-        if message.guild:
+        if message.guild: #Track number of user messages
             await df.record_user_messages(message.author.id, message.guild.id)
         await self.bot.process_commands(message)
     
@@ -47,6 +47,8 @@ class messageTracker(commands.Cog):
                         await ctx.reply("Unable to pin message!")
                     return
         await ctx.reply("Unable to pin message!")
+
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(messageTracker(bot))
