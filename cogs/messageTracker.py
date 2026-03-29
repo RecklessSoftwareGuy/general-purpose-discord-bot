@@ -32,3 +32,21 @@ class messageTracker(commands.Cog):
             }
             await ctx.reply(embed=embeds.mprofile_x0(userData))
         return
+    
+    @commands.command(name="pin_message", aliases=["pin"])
+    @commands.has_permissions(manage_messages=True)
+    async def pin_message(self, ctx: commands.Context):
+        if ctx.message.reference:
+            messageId = ctx.message.reference.message_id
+            if messageId:
+                message = await ctx.channel.fetch_message(messageId)
+                if message:
+                    try:
+                        await message.pin()
+                    except:
+                        await ctx.reply("Unable to pin message!")
+                    return
+        await ctx.reply("Unable to pin message!")
+
+async def setup(bot: commands.Bot):
+    await bot.add_cog(messageTracker(bot))
