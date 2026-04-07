@@ -10,12 +10,17 @@ bot = protocols.GPDB(command_prefix=commands.when_mentioned_or(*config["prefix"]
 @bot.listen('on_ready')
 async def ready():
     await protocols.extensions(bot, "load")
+    await bot.change_presence(
+        activity=discord.Activity(type=discord.ActivityType.watching, name=f"{len(bot.guilds)} servers | {config['prefix'][0]}help")
+    )
     print(f"\n{bot.user.display_name} is online!") #type: ignore
+    print(f"Serving {len(bot.guilds)} guilds with {len(bot.users)} users")
 
 
 @bot.command(name="ping")
 async def network_round_trip_latency(ctx: commands.Context):
-    await ctx.send(f"Pong! **{int(bot.latency * 1000)}ms**")
+    em = discord.Embed(description=f"🏓 Pong! **{int(bot.latency * 1000)}ms**", colour=discord.Colour.green())
+    await ctx.send(embed=em)
 
 
 bot.run(token=config["token"])
